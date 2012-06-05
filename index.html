@@ -3,9 +3,13 @@
 <html>
 	
 	<head>
-		<script src="assets/js/libraries/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="assets/js/libraries/sketch.js" type="text/javascript" charset="utf-8"></script>
-		<script src="assets/js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/libraries/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/libraries/sketch.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/libraries/jgestures.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/libraries/ember.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
+		
 		<link rel="stylesheet" href="assets/css/layout.css" type="text/css" media="screen" title="no title" charset="utf-8">
 		
 		<title>Drawing App</title>
@@ -16,10 +20,34 @@
 		
 		<div class='app-container'>
 			
-			<canvas id="canvas" width="1000" height="500"></canvas>
+			<div class='header-container'>
+				<span>Header</span>
+			</div>
+			
+			<div class='canvas-container'>
+				<canvas id="canvas" width="900" height="635"></canvas>
+			</div>
+			
+			<div class='toolbar'>
+				<div class='tools'>
+					<a href='#canvas' data-tool='marker'>Marker</a>
+					<a href='#canvas' data-tool='eraser'>Eraser</a>
+				</div>
+				
+				<div class='palette'>
+					<a href='#canvas' data-color='#fff' style='background-color: #fff'></a>
+					<a href='#canvas' data-color='#000' style='background-color: #000'></a>
+					<a href='#canvas' data-color='#ed181c' style='background-color: #ed181c'></a>
+					<a href='#canvas' data-color='#eb762c' style='background-color: #eb762c'></a>
+					<a href='#canvas' data-color='#e7d048' style='background-color: #e7d048'></a>
+					<a href='#canvas' data-color='#4be353' style='background-color: #4be353'></a>
+					<a href='#canvas' data-color='#253adf' style='background-color: #253adf'></a>
+					<a href='#canvas' data-color='#9a3ae0' style='background-color: #9a3ae0'></a>
+					<a href='#canvas' data-color='#715245' style='background-color: #715245'></a>
+				</div>
+			</div>
 			
 		</div>
-		
 		
 	</body>
 	

@@ -1,3 +1,16 @@
-body {background:black; margin:0; padding:0}
+body {background:rgb(255,255,255); margin:0; padding:0}
 
-canvas {background:white}
+.header-container {background:rgb(204,204,204); background-image: -webkit-linear-gradient(top, rgb(247, 248, 249) 10%, rgb(171, 176, 186) 90%); left: 0; padding:.5em 2em; border-top:1px solid rgb(177,181,189); position:absolute; right:0; top:0}
+
+canvas {background:rgb(255,255,255)}
+
+.canvas-container {text-align:center; width:900px}
+
+.toolbar {background:rgb(204,204,204); background-image: -webkit-linear-gradient(top, rgb(105, 105, 105) 15%, rgb(0, 0, 0) 65%); box-sizing: border-box; border-top:1px solid rgb(70,70,70); bottom:0; left: 0; margin:0 auto; padding:.5em 1em; position:absolute; right:0; width:100%}
+
+  .toolbar .tools {float:left}
+    .toolbar .tools a {color:rgb(255,255,255)}
+  
+  .toolbar .palette {display:inline-block; float:right; padding:0; text-align:center; width:230px}
+    .toolbar .palette a {border-radius:50%; box-shadow:0px 0px 7px rgb(40,40,40); display:inline-block; height:30px; margin:.1em .35em; vertical-align:middle; width:30px}
+    .toolbar .palette a.selected {box-shadow:0px 0px 7px rgb(245,245,245)}
