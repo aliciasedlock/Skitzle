@@ -25,14 +25,16 @@
 	
 	<body>
 		
-		<div class='app-container'><!-- Where the magic happens --></div>
+		<div class='app-container'>
+			<!-- Where the sweet, sweet, love is made -->
+		</div>
 		
 		<!-- Templates -->
 		<script id="home-template" type="text/x-handlebars-template">
 			<div class='home'>
 				<h1>Skitzel</h1>
 				<div class='sketches'>
-					<a href='#/sketch'><div class='sketch'></div></a>
+					<a href='#/sketch'><div class='sketch'><span>+</span></div></a>
 					<span>Aw, no sketches yet. Start a new one!</span>
 				</div>
 			</div>
@@ -40,7 +42,7 @@
 		
 		<script id="sketch-template" type="text/x-handlebars-template">
 			<div class='header-container'>
-				<span>Header</span>
+				<span><a class='back'>Back</a></span><h3>Header</h3><span class='actions'>Other buttons!</span>
 			</div>
 			
 			<div class='canvas-container'>

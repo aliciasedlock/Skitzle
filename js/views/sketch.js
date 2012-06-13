@@ -7,8 +7,7 @@ Sketch = (function (controller) {
   controller.init = function() {
     var source = $('#sketch-template').html(),
     template   = Handlebars.compile(source),
-    container  = $('.app-container'),
-    context;
+    container  = $('.app-container');
     
     container.html(template);
     
@@ -16,6 +15,7 @@ Sketch = (function (controller) {
     CANVAS = document.getElementById('sketch');
     CONTEXT = CANVAS.getContext('2d');
     
+    // Set up our canvas
     controller.canvasReset();
     // Bind our events
     controller.bindEvents();
@@ -42,6 +42,7 @@ Sketch = (function (controller) {
     $('a.clear').on('click', controller.canvasReset);
     $('.palette a').on('click', controller.changeDrawingColor);
     $(CANVAS).on('mousedown mouseup mousemove', controller.draw);
+    $('a.back').on('click', controller.goHome);
     
     // Effects for switching colors
     $('.palette a').on('click', function(event){
@@ -59,7 +60,8 @@ Sketch = (function (controller) {
   controller.updateUndoHistory = function() {
     /**
       The canvas element currently does not let you save what has been drawn natively.
-      So we'll create an image after each change and stuff them into an array.
+      So we'll create an image after each change and stuff them into an array
+      and base our 'undos' off of that.
     **/
     var imageData = CANVAS.toDataURL('image/png');
     controller.undoHistory.push(imageData);
@@ -68,19 +70,15 @@ Sketch = (function (controller) {
   
   controller.undo = function(event) {
     var e = $(event.target);
-    
     if (!e.hasClass('disabled')) {
       
       if (controller.undoHistory.length > 0) {
         var undoImage = new Image();
-        
         $(undoImage).load(function(){
           CONTEXT.drawImage(undoImage, 0, 0);
         });
-        
         undoImage.src = controller.undoHistory.pop();
-      }
-      
+      } 
     }
     
   };
@@ -120,6 +118,18 @@ Sketch = (function (controller) {
         break;
     }
   };
+  
+  controller.goHome = function (event) {
+    if (controller.undoHistory.length > 0) {
+      event.preventDefault();
+      var answer = confirm('You have unsaved changes! You sure you want to leave?');
+      if (answer) {
+        window.location.href = '#/home'
+      }
+    } else {
+      window.location.href = '#/home'
+    }
+  }
   
   return controller; 
   

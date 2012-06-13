@@ -1,23 +1,33 @@
-body {background:rgb(255,255,255); font-family: Arial; margin:0; padding:0}
+body {background:rgb(45,45,45); font-family: Arial; margin:0; padding:0}
 
 /**
   = Home View
+  -------------------
 **/
 
-.home {width:100%}
-  .home h1 {text-align:center}
-  .home .sketches {border-top:1px solid rgb(215,215,215); margin: 0 auto; padding:0 6em; width:45.8em}
-    .sketches .sketch {border:1px solid rgb(150,150,150); display:inline-block; height: 10em; margin:1.1em .6em 0; vertical-align:middle; width:10em}
+.home {color: rgb(205,205,205); width:100%}
+  .home h1 {border-bottom: 1px solid rgb(205,205,205); color: rgb(235,235,235); font-size:1.5em; margin:.8em 4.6em 0; padding-bottom:.2em; text-align:left}
+  .home .sketches {margin: 0 auto; padding:0 6em; width:45.8em}
+    .sketches .sketch {background: rgb(235,235,235); -webkit-box-shadow: 0px 0px 25px rgb(0,0,0); display:inline-block; height: 10em; margin:1.1em .6em 0; vertical-align:middle; width:10em}
+      .sketches .sketch span {display:inline-block; color:rgb(45,45,45); font-size:5em; margin-top:.4em; text-align:center; width:100%}
 
 /**
   = Sketch View
+  -------------------
 **/
-.header-container {background:rgb(204,204,204); background-image: -webkit-linear-gradient(top, rgb(247, 248, 249) 10%, rgb(171, 176, 186) 90%); left: 0; padding:.5em 2em; border-top:1px solid rgb(177,181,189); position:absolute; right:0; top:0}
 
+/** Header **/
+.header-container {background:rgb(204,204,204); background-image: -webkit-linear-gradient(top, rgb(247, 248, 249) 10%, rgb(171, 176, 186) 90%); left: 0; padding:.5em 2em; border-top:1px solid rgb(177,181,189); position:absolute; right:0; top:0}
+  .header-container span {display:inline-block; float:left}
+  .header-container h3 {display:inline-block; margin:0; text-align:center; width:742px}
+  .header-container .actions {float:right}
+
+/** Canvas **/
 canvas {background:rgb(255,255,255)}
 
 .canvas-container {text-align:center; width:900px}
 
+/** Toolbar **/
 .toolbar {background:rgb(204,204,204); background-image: -webkit-linear-gradient(top, rgb(105, 105, 105) 15%, rgb(0, 0, 0) 65%); box-sizing: border-box; border-top:1px solid rgb(70,70,70); bottom:0; left: 0; margin:0 auto; padding:.5em 1em; position:absolute; right:0; width:100%}
 
   .toolbar .tools {float:left}
