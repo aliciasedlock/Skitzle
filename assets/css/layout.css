@@ -1,5 +1,17 @@
-body {background:rgb(255,255,255); margin:0; padding:0}
+body {background:rgb(255,255,255); font-family: Arial; margin:0; padding:0}
 
+/**
+  = Home View
+**/
+
+.home {width:100%}
+  .home h1 {text-align:center}
+  .home .sketches {border-top:1px solid rgb(215,215,215); margin: 0 auto; padding:0 6em; width:45.8em}
+    .sketches .sketch {border:1px solid rgb(150,150,150); display:inline-block; height: 10em; margin:1.1em .6em 0; vertical-align:middle; width:10em}
+
+/**
+  = Sketch View
+**/
 .header-container {background:rgb(204,204,204); background-image: -webkit-linear-gradient(top, rgb(247, 248, 249) 10%, rgb(171, 176, 186) 90%); left: 0; padding:.5em 2em; border-top:1px solid rgb(177,181,189); position:absolute; right:0; top:0}
 
 canvas {background:rgb(255,255,255)}

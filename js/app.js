@@ -1,6 +1,15 @@
 $(document).ready(function(){
   
-  $('#canvas').sketch();
+  
+  Path.map('#/home').to(Home.init);
+  
+  Path.map('#/sketch').to(Sketch.init);
+
+  Path.root('#/home');
+
+  Path.listen();
+  
+  /*$('#canvas').sketch();
   
   $('.palette a').on('click', function(event){
     $('.palette a').removeClass('selected');
@@ -10,6 +19,6 @@ $(document).ready(function(){
   $('.toolbar').bind('swipedown', function(){
     alert('fs');
     //$('.toolbar').animate('bottom', '-30px')
-  });
+  });*/
   
 });
