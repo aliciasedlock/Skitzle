@@ -3,6 +3,7 @@ Sketch = (function (controller) {
   
   controller = {};
   controller.undoHistory = [];
+  controller.redoHistory = [];
   
   controller.init = function() {
     var source = $('#sketch-template').html(),
@@ -23,22 +24,26 @@ Sketch = (function (controller) {
   
   controller.canvasReset = function() {
     // Sets our fresh canvas options
+    $(CANVAS).attr({'width': window.innerWidth, 'height': window.innerHeight})
     CONTEXT.lineWidth = 4;
     CONTEXT.lineCap = 'round';
     CONTEXT.save();
     CONTEXT.fillStyle = '#fff';
     CONTEXT.fillRect(0, 0, CONTEXT.canvas.width, CONTEXT.canvas.height);
     CONTEXT.restore();
-    
+    // Clear the history since we no longer have one now
     controller.undoHistory = [];
+    controller.redoHistory = [];
+    controller.updateUndoHistory();
   };
   
   controller.bindEvents = function() {
     
-    // Bind our undo functionality
-    $('#sketch').on('mousedown', controller.updateUndoHistory);
+    // Bind ALL the events
+    $('#sketch').on('mouseup', controller.updateUndoHistory);
     $('a.eraser').on('click', controller.setEraser);
-    $('a.undo').on('click', controller.undo);
+    $('a.undo').not('disabled').on('click', controller.undo);
+    $('a.redo').not('disabled').on('click', controller.redo);
     $('a.clear').on('click', controller.canvasReset);
     $('.palette a').on('click', controller.changeDrawingColor);
     $(CANVAS).on('mousedown mouseup mousemove', controller.draw);
@@ -65,22 +70,52 @@ Sketch = (function (controller) {
     **/
     var imageData = CANVAS.toDataURL('image/png');
     controller.undoHistory.push(imageData);
-    $('a.undo').removeClass('disabled');
+    // The first url in our array will be blank, so we don't have to allow
+    // users to undo until a second url is pushed
+    if (controller.undoHistory.length > 1)
+      $('a.undo').removeClass('disabled');
   };
   
   controller.undo = function(event) {
     var e = $(event.target);
-    if (!e.hasClass('disabled')) {
+
+    if (controller.undoHistory.length > 0) {
+      var undoImage = new Image();
       
-      if (controller.undoHistory.length > 0) {
-        var undoImage = new Image();
-        $(undoImage).load(function(){
-          CONTEXT.drawImage(undoImage, 0, 0);
-        });
-        undoImage.src = controller.undoHistory.pop();
-      } 
+      $(undoImage).load(function(){
+        CONTEXT.drawImage(undoImage, 0, 0);
+      });
+      
+      undoImage.src = controller.undoHistory[controller.undoHistory.length - 2];
+      controller.redoHistory.push(controller.undoHistory[controller.undoHistory.length - 1]);
+      $('a.redo').removeClass('disabled');
+      
+      controller.undoHistory.pop();
+      
+      if (controller.undoHistory.length == 1)
+        $('a.undo').addClass('disabled');
     }
+
+  };
+  
+  controller.redo = function(event) {
+    var e = $(event.target);
     
+    if (controller.redoHistory.length > 0) {
+      var redoImage = new Image(),
+      img = controller.redoHistory.pop();
+      
+      $(redoImage).load(function(){
+        CONTEXT.drawImage(redoImage, 0, 0);
+      });
+      
+      redoImage.src = img;
+      controller.undoHistory.push(img);
+      $('a.undo').removeClass('disabled');
+      
+      if (controller.redoHistory.length == 0)
+        $('a.redo').addClass('disabled');
+    }
   };
   
   controller.changeDrawingColor = function(event) {
@@ -100,7 +135,6 @@ Sketch = (function (controller) {
     switch (event.type) {
       case 'mousedown':
         DRAW = 1;
-        controller.updateUndoHistory();
         CONTEXT.beginPath();
         CONTEXT.moveTo(event.pageX-left, event.pageY-top);
         break;
@@ -109,6 +143,8 @@ Sketch = (function (controller) {
         CONTEXT.lineTo(event.pageX-left, event.pageY-top);
         CONTEXT.stroke();
         CONTEXT.closePath();
+        // Changes were made, so let's clear the redo history
+        controller.redoHistory = [];
         break;
       case 'mousemove':
         if (DRAW == 1){

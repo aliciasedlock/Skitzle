@@ -1,5 +1,8 @@
 body {background:rgb(45,45,45); font-family: Arial; margin:0; padding:0}
 
+.disabled {opacity:.4}
+a:hover {cursor:pointer}
+
 /**
   = Home View
   -------------------
@@ -23,7 +26,7 @@ body {background:rgb(45,45,45); font-family: Arial; margin:0; padding:0}
   .header-container .actions {float:right}
 
 /** Canvas **/
-canvas {background:rgb(255,255,255)}
+canvas {background:rgb(255,249,239)}
 
 .canvas-container {text-align:center; width:900px}
 
