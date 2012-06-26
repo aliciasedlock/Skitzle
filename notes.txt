@@ -1,0 +1,23 @@
+For API:
+
+	- User login
+ 	- User creation
+	- Fetch sketches
+	- Update existing
+	- Save/Update custom palettes
+	
+For user object
+
+	- user email
+	- png of last state
+	- is it the user's turn to update
+	- has the sketch been updated since
+
+
+sketches object
+
+	- who is part of the sketch
+	- sketch ID
+	- screen cap of last update
+	- which user has to draw next
+	

@@ -3,6 +3,7 @@
 <html>
 	
 	<head>
+		<link rel="stylesheet" href="assets/css/layout.css" type="text/css" media="screen" title="no title" charset="utf-8">
 		
 		<!-- Libraries -->
 		<script src="js/libraries/jquery.min.js" type="text/javascript" charset="utf-8"></script>
@@ -10,14 +11,15 @@
 		<script src="js/libraries/path.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/libraries/handlebars.js" type="text/javascript" charset="utf-8"></script>
 		
-		<!-- Views -->
-		<script src="js/views/home.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/views/sketch.js" type="text/javascript" charset="utf-8"></script>
+		<!-- Models -->
+		<script src="js/models/sketchData.js" type="text/javascript" charset="utf-8"></script>
+		
+		<!-- Controllers -->
+		<script src="js/controllers/home.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/controllers/sketch.js" type="text/javascript" charset="utf-8"></script>
 		
 		<!-- Kick Up The Jams -->
 		<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
-
-		<link rel="stylesheet" href="assets/css/layout.css" type="text/css" media="screen" title="no title" charset="utf-8">
 		
 		<title>Skitzel</title>
 		
@@ -42,11 +44,11 @@
 		
 		<script id="sketch-template" type="text/x-handlebars-template">
 			<div class='header-container'>
-				<span><a class='back'>Back</a></span><h3>Header</h3><span class='actions'>Other buttons!</span>
+				<span><a class='back'>Back</a></span><h3>Header</h3><a class='options'>Other buttons!</a>
 			</div>
 			
 			<div class='canvas-container'>
-				<canvas id="sketch"></canvas>
+				<canvas id='sketch'></canvas>
 			</div>
 			
 			<div class='toolbar'>
@@ -68,6 +70,16 @@
 					<a data-color='#253adf' style='background-color: #253adf'></a>
 					<a data-color='#9a3ae0' style='background-color: #9a3ae0'></a>
 					<a data-color='#715245' style='background-color: #715245'></a>
+				</div>
+			</div>
+		</script>
+		
+		<script id="options-template" type="text/x-handlebars-template">
+			<div class='options-container'>
+				<div class='options'>
+					<a class='send'>Send sketch</a>
+					<a class='download'>Save sketch to device</a>
+					<a class='revert'>Revert all changes</a>
 				</div>
 			</div>
 		</script>
