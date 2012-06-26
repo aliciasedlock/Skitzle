@@ -33,12 +33,6 @@ Sketch = (function (controller) {
     $(CANVAS).on('mousedown mouseup mousemove', controller.draw);
     $('a.back').on('click', controller.goHome);
     $('a.options').not('open').on('click', controller.toggleOptions);
-    
-    // Effects for switching colors
-    $('.palette a').on('click', function(event){
-      $('.palette a').removeClass('selected');
-      $(event.target).addClass('selected');
-    });
 
     /*$('.toolbar').bind('swipedown', function(){
       alert('fs');
@@ -162,7 +156,10 @@ Sketch = (function (controller) {
   controller.changeDrawingColor = function(event) {
     var e = $(event.target),
     color = e.data('color');
+    
+    $('.palette a').removeClass('selected');
     CONTEXT.strokeStyle = color;
+    e.addClass('selected');
   };
   
   controller.setEraser = function() {
