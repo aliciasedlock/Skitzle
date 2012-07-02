@@ -13,6 +13,7 @@
 		
 		<!-- Models -->
 		<script src="js/models/sketchData.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/models/user.js" type="text/javascript" charset="utf-8"></script>
 		
 		<!-- Controllers -->
 		<script src="js/controllers/home.js" type="text/javascript" charset="utf-8"></script>
@@ -37,7 +38,13 @@
 				<h1>Skitzel</h1>
 				<div class='sketches'>
 					<a href='#/sketch'><div class='sketch'><span>+</span></div></a>
-					<span>Aw, no sketches yet. Start a new one!</span>
+					{{#if sketches}}
+						{{#each sketches}}
+							<a href='#/sketch/{{safeURL}}'><div class='sketch' style='background: url({{sketchURL}}) no-repeat 25% 50%; background-size:200%'></div></a>
+						{{/each}}
+					{{else}}
+						<span>Aw, you don&apos;t have any sketches to work on.</span>
+					{{/if}}
 				</div>
 			</div>
 		</script>

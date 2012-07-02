@@ -10,12 +10,15 @@ Sketch = (function (controller) {
     template   = Handlebars.compile(source),
     container  = $('.app-container');
     
+    controller.dataURL = Path.params.dataURL ? Path.params.dataURL.replace(/\?/g, '/') : null;
+    
+    // Insert the view
     container.html(template);
     
     // Set canvas and context globally so we only fetch it once
     CANVAS = document.getElementById('sketch');
     CONTEXT = CANVAS.getContext('2d');
-    
+
     // Set up our canvas
     controller.canvasReset();
     // Bind our events
@@ -48,9 +51,20 @@ Sketch = (function (controller) {
     CONTEXT.lineWidth = 4;
     CONTEXT.lineCap = 'round';
     CONTEXT.save();
-    CONTEXT.fillStyle = '#fff';
-    CONTEXT.fillRect(0, 0, CONTEXT.canvas.width, CONTEXT.canvas.height);
-    CONTEXT.restore();
+    
+    if (controller.dataURL != null) {
+      var bg = new Image();
+      
+      $(bg).load(function(){
+        CONTEXT.drawImage(bg, 0, 0);
+      });
+      bg.src = controller.dataURL;
+    } else {
+      CONTEXT.fillStyle = '#fff';
+      CONTEXT.fillRect(0, 0, CONTEXT.canvas.width, CONTEXT.canvas.height);
+      CONTEXT.restore();
+    }
+    
     // Clear the history since we no longer have one now
     controller.undoHistory = [];
     controller.redoHistory = [];
@@ -208,7 +222,7 @@ Sketch = (function (controller) {
   
   controller.downloadSketch = function() {
     /* We can't actually save the file to the machine, so we just open it in a browser tab */
-    return window.open(CANVAS.toDataURL('image/jpg'));
+    return window.open(CANVAS.toDataURL('image/png'));
   };
   
   controller.sendSketch = function() {
@@ -222,7 +236,7 @@ Sketch = (function (controller) {
     };
     
     if (sendTo) {
-      SketchData.add('user', 'id', CANVAS.toDataURL('image/jpg'), sendTo);
+      SketchData.add('user', 'id', CANVAS.toDataURL('image/png'), sendTo);
       SketchData.sendSketch(successCallback, failureCallback);
     }
   };

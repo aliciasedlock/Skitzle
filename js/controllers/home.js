@@ -3,13 +3,16 @@ var Home = (function (controller) {
   controller = {};
   
   controller.init = function() {
+    
     var source = $('#home-template').html(),
     template   = Handlebars.compile(source),
-    container  = $('.app-container');
+    container  = $('.app-container'),
+    sketches = User.getUserSketches(function(sketches){
+      container.html(template(sketches));
+    });
     
-    container.html(template);
   };
-  
+
   return controller; 
   
 }(Home));

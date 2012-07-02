@@ -26,8 +26,6 @@ a:hover {cursor:pointer}
   .header-container .options {float:right}
 
 /** Canvas **/
-canvas {background:rgb(255,249,239)}
-
 .canvas-container {text-align:center; width:900px}
 
 /** Toolbar **/
